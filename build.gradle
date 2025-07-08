@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'idea'
-    // The 'loom' plugin handles everything, so we remove the old forge plugin.
+    id 'architectury-plugin' version '3.4.+' // This was the missing plugin
     id 'dev.architectury.loom' version '1.3-SNAPSHOT'
 }
 
@@ -49,7 +49,7 @@ repositories {
 
 // Dependencies
 dependencies {
-    // Loom now handles the minecraft dependency automatically, so we remove it from here.
+    // Loom now handles the minecraft dependency automatically
 
     // Architectury API (Forge Version)
     modApi "dev.architectury:architectury-forge:${project.architectury_version}"
