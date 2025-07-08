@@ -20,7 +20,6 @@ architectury {
 // Loom configuration
 loom {
     forge {
-        // The incorrect 'forgeVersion' property has been removed.
         mixinConfig "ftbquests.mixins.json"
     }
 }
@@ -48,7 +47,8 @@ repositories {
 
 // Dependencies
 dependencies {
-    // Loom now handles the minecraft dependency automatically
+    // Declaring the dependency using the 'forge' configuration provided by Loom.
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
     // Architectury API (Forge Version)
     modApi "dev.architectury:architectury-forge:${project.architectury_version}"
