@@ -1,8 +1,8 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'net.minecraftforge.gradle' version '5.1.+'
-    id 'dev.architectury.loom' version '1.1-SNAPSHOT'
+    // The 'loom' plugin handles everything, so we remove the old forge plugin.
+    id 'dev.architectury.loom' version '1.3-SNAPSHOT'
 }
 
 // Project Information
@@ -20,6 +20,8 @@ architectury {
 // Loom configuration
 loom {
     forge {
+        // We specify the forge version here for Loom to use
+        forgeVersion = project.forge_version
         mixinConfig "ftbquests.mixins.json"
     }
 }
@@ -40,14 +42,14 @@ repositories {
     maven { url 'https://maven.minecraftforge.net/' }
     maven { url 'https://maven.architectury.dev' }
     maven { url 'https://maven.fabricmc.net/' }
-    maven { url 'https://maven.feed-the-beast.com/' } // FTB Maven is CRUCIAL
+    maven { url 'https://maven.feed-the-beast.com/' }
     maven { url 'https://www.cursemaven.com' }
     maven { url 'https://dvs1.proxyschemas.com/maven/' }
 }
 
 // Dependencies
 dependencies {
-    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+    // Loom now handles the minecraft dependency automatically, so we remove it from here.
 
     // Architectury API (Forge Version)
     modApi "dev.architectury:architectury-forge:${project.architectury_version}"
