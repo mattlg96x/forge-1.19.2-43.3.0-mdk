@@ -1,0 +1,56 @@
+modLoader = "javafml"
+loaderVersion = "[43,44)"
+license = "MIT"
+issueTrackerURL = "https://github.com/FTBTeam/FTB-Quests/issues"
+
+[[mods]]
+modId = "ftbquests"
+version = "${file.jarVersion}"
+displayName = "FTB Quests"
+description = '''
+Your questbook reborn—with custom chapters, mixin magic, and Forge compatibility.
+'''
+authors = "FTB Team"
+credits = "Built on the foundations of modular magic and bytecode wizardry."
+
+[[dependencies.ftbquests]]
+modId = "ftblibrary"
+mandatory = true
+versionRange = "*"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ftbquests]]
+modId = "ftbteams"
+mandatory = true
+versionRange = "*"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ftbquests]]
+modId = "itemfilters"
+mandatory = true
+versionRange = "*"
+ordering = "NONE"
+side = "BOTH"
+
+[[mixins]]
+config = "ftbquests-common.mixins.json"
+
+[[mixins]]
+config = "ftbquests.mixins.json"
+
+[[mixins]]
+config = "ftbquests-forge.mixins.json"
+
+[[mixins]]
+config = "ftbquests-compat.mixins.json"
+
+[[mixins]]
+config = "ftblibrary.mixins.json"
+
+[[mixins]]
+config = "ftbteams.mixins.json"
+
+[[mixins]]
+config = "itemfilters.mixins.json"
