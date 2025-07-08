@@ -2,20 +2,11 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         mavenCentral()
-        // All exhaustive Maven repositories for plugins
-        maven { url 'https://maven.minecraftforge.net/' } // ForgeGradle plugin
+        maven { url 'https://maven.minecraftforge.net/' }
         maven { url 'https://maven.architectury.dev' }
         maven { url 'https://maven.fabricmc.net/' }
-        maven { url 'https://maven.creeperhost.net' }
-        maven { url 'https://maven.blamejared.com/' }
-        maven { url 'https://www.cursemaven.com' }
-        maven { url 'https://dvs1.proxyschemas.com/maven/' }
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        maven { url 'https://maven.feed-the-beast.com/' } // FTB's own Maven
+        maven { url 'https://maven.feed-the-beast.com/' }
     }
 }
 
-// Root project name must match your MDK folder name
-rootProject.name = "MyNewFtbQuestsProject"
-
-// No 'include' statements for 'common' as this is a single-module project
+rootProject.name = "forge-1.19.2-43.3.0-mdk"
