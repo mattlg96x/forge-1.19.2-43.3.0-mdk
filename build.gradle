@@ -1,83 +1,53 @@
 plugins {
-    id 'java'
-    id 'idea'
-    id 'architectury-plugin' version '3.4.+'
-    id 'dev.architectury.loom' version '1.3-SNAPSHOT'
+    id 'net.minecraftforge.gradle' version '5.1.+'
 }
 
-// Project Information
-group = project.maven_group
-version = project.mod_version
-archivesBaseName = project.archives_base_name
+group = 'com.example' // ← Change this to your preferred package (e.g., com.mattlg96x)
+version = '1.0'
+archivesBaseName = 'yourmodid' // ← Replace with your mod ID (no spaces)
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-// Setup Architectury
-architectury {
-    minecraft = project.minecraft_version
-}
-
-// Loom configuration
-loom {
-    forge {
-        mixinConfig "ftbquests.mixins.json"
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17) // Forge 1.19.2 requires Java 17
     }
 }
 
-// Source Sets
-sourceSets {
-    main {
-        resources {
-            srcDirs "src/main/resources"
-            exclude ".cache"
+minecraft {
+    mappings channel: 'official', version: '1.19.2'
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Optional: Customize VM args or mods here
+        }
+        server {
+            workingDirectory project.file('run')
         }
     }
 }
 
-// Repositories for all dependencies
 repositories {
-    mavenCentral()
-    maven { url 'https://maven.minecraftforge.net/' }
-    maven { url 'https://maven.architectury.dev' }
-    maven { url 'https://maven.fabricmc.net/' }
-    maven { url 'https://maven.feed-the-beast.com/' }
-    maven { url 'https://www.cursemaven.com' }
-    maven { url 'https://dvs1.proxyschemas.com/maven/' }
-}
-
-// Dependencies
-dependencies {
-    // This line fixes the error "Configuration 'minecraft' has no dependencies"
-    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-
-    // Architectury API (Forge Version)
-    modApi "dev.architectury:architectury-forge:${project.architectury_version}"
-
-    // FTB Dependencies
-    modApi "dev.ftb.mods:ftb-library-forge:${project.ftb_library_version}"
-    modApi "dev.ftb.mods:ftb-teams-forge:${project.ftb_teams_version}"
-    modApi "dev.ftb.mods:item-filters-forge:${project.itemfilters_version}"
-}
-
-// Process Resources for mods.toml
-processResources {
-    inputs.property "version", project.version
-    filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
+    maven {
+        name = "Forge"
+        url = "https://maven.minecraftforge.net/"
     }
+    mavenCentral()
 }
 
-// Configure Jar task
+dependencies {
+    minecraft "net.minecraftforge:forge:1.19.2-43.3.0"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "ftbquests",
-                "Specification-Vendor"    : "ftb",
-                "Specification-Version"   : "1",
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "ftb",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-}
+            "Specification-Title"     : "yourmodid",
+            "Specification-Vendor"    : "yourname",
+            "Specification-Version"   : "1",
+            "Implementation-Title"    : "yourmodid",
+            "Implementa
