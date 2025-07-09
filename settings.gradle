@@ -6,6 +6,8 @@ pluginManagement {
         maven { url 'https://maven.architectury.dev' }
         maven { url 'https://maven.fabricmc.net/' }
         maven { url 'https://maven.feed-the-beast.com/' }
+        // Add the repository for the Mixin plugin
+        maven { url 'https://repo.spongepowered.org/maven/' }
     }
 }
 

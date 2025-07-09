@@ -1,53 +1,56 @@
 plugins {
-    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'java'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '6.0.+'
+    // This is the correct ID and a more compatible version for the Mixin plugin
+    id 'org.spongepowered.gradle.mixin' version '0.7.+'
 }
 
-group = 'com.example' // ← Change this to your preferred package (e.g., com.mattlg96x)
-version = '1.0'
-archivesBaseName = 'yourmodid' // ← Replace with your mod ID (no spaces)
+// Project Information
+version = project.mod_version
+group = project.maven_group
+archivesBaseName = project.archives_base_name
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17) // Forge 1.19.2 requires Java 17
-    }
-}
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
+// Configure Minecraft and Mappings
 minecraft {
     mappings channel: 'official', version: '1.19.2'
 
     runs {
         client {
             workingDirectory project.file('run')
-
-            // Optional: Customize VM args or mods here
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                "${project.archives_base_name}" {
+                    source sourceSets.main
+                }
+            }
         }
+
         server {
             workingDirectory project.file('run')
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                "${project.archives_base_name}" {
+                    source sourceSets.main
+                }
+            }
         }
     }
 }
 
+// Configure Mixin Annotation Processor
+mixin {
+    add sourceSets.main, "ftbquests.refmap.json"
+    config "ftbquests.mixins.json"
+}
+
+// Repositories for all dependencies
 repositories {
-    maven {
-        name = "Forge"
-        url = "https://maven.minecraftforge.net/"
-    }
     mavenCentral()
-}
-
-dependencies {
-    minecraft "net.minecraftforge:forge:1.19.2-43.3.0"
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-}
-
-jar {
-    manifest {
-        attributes([
-            "Specification-Title"     : "yourmodid",
-            "Specification-Vendor"    : "yourname",
-            "Specification-Version"   : "1",
-            "Implementation-Title"    : "yourmodid",
-            "Implementa
+    maven { url 'https://maven.minecraftforge.net/' }
+    maven { url 'https://maven.architectury.dev' }
+    maven { url 'https://maven.fabricmc.net/' }
+    maven { url 'https://maven.feed-the-beast.com/' }
+    maven { url 'https
